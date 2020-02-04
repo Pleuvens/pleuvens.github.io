@@ -1,0 +1,3 @@
+[submodule "drumkit"]
+	path = drumkit
+	url = https://github.com/Pleuvens/drumkit
