@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="index.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <img class="background" src="images/background.jpg"/>
+        <div class="container">
+            <button name="boom" onclick="Play(this)">Boom</button>
+            <button name="clap" onclick="Play(this)">Clap</button>
+            <button name="hihat" onclick="Play(this)">Hi-Hat</button>
+            <button name="kick" onclick="Play(this)">Kick</button>
+            <button name="openhat" onclick="Play(this)">Open Hat</button>
+            <button name="ride" onclick="Play(this)">Ride</button>
+            <button name="snare" onclick="Play(this)">Snare</button>
+            <button name="tink" onclick="Play(this)">Tink</button>
+            <button name="tom" onclick="Play(this)">Tom</button>
+        </div>
+    </body>
+
+    <script>
+        document.addEventListener('keydown', Keyboard);
+
+        let audios = {
+            boom: "sounds/boom.wav",
+            clap: "sounds/clap.wav",
+            hihat: "sounds/hihat.wav",
+            kick: "sounds/kick.wav",
+            openhat: "sounds/openhat.wav",
+            ride: "sounds/ride.wav",
+            snare: "sounds/snare.wav",
+            tink: "sounds/tink.wav",
+            tom: "sounds/tom.wav"
+        }
+
+        function Keyboard(event) {
+            let target = null;
+            switch(event.keyCode) {
+                case 65:
+                    target = document.querySelector("button[name='boom']");
+                    break;
+                case 90:
+                    target = document.querySelector("button[name='clap']");
+                    break;
+                case 69:
+                    target = document.querySelector("button[name='hihat']");
+                    break;
+                case 82:
+                    target = document.querySelector("button[name='kick']");
+                    break;
+                case 84:
+                    target = document.querySelector("button[name='openhat']");
+                    break;
+                case 89:
+                    target = document.querySelector("button[name='ride']");
+                    break;
+                case 85:
+                    target = document.querySelector("button[name='snare']");
+                    break;
+                case 73:
+                    target = document.querySelector("button[name='tink']");
+                    break;
+                case 79:
+                    target = document.querySelector("button[name='tom']");
+                    break;
+                default:
+                    return;
+            }
+            Play(target);
+        }
+
+        function Play(target) {
+            let sound = target.getAttribute('name');
+            let audio = new Audio(audios[sound]);
+            audio.play();
+            if (target.classList.contains('btn-animate')) {
+                target.classList.remove('btn-animate');
+                void document.offsetWidth;
+            }
+            target.classList.add('btn-animate');
+            setTimeout(() => {target.classList.remove('btn-animate')}, 250);
+        }
+    </script>
+</html>
